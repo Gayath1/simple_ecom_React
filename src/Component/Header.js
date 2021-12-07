@@ -144,7 +144,7 @@ export default function Header() {
     }, [user, loading]);
 
     return (
-        <div className="bg-white">
+        <div className="bg-white z-50">
             {/* Mobile menu */}
             <Transition.Root show={open} as={Fragment}>
                 <Dialog as="div" className="fixed inset-0 flex z-40 lg:hidden" onClose={setOpen}>
@@ -283,7 +283,7 @@ export default function Header() {
                 </Dialog>
             </Transition.Root>
 
-            <header className="relative bg-white">
+            <header className="relative bg-white z-50">
                 {/*<p className="bg-indigo-600 h-10 flex items-center justify-center text-sm font-medium text-white px-4 sm:px-6 lg:px-8">*/}
                 {/*    Get free delivery on orders over $100*/}
                 {/*</p>*/}

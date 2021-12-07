@@ -536,6 +536,9 @@ video {
 .left-0 {
 	left: 0px;
 }
+.z-50 {
+	z-index: 50;
+}
 .z-40 {
 	z-index: 40;
 }
@@ -861,6 +864,10 @@ video {
 .bg-red-600 {
 	--tw-bg-opacity: 1;
 	background-color: rgba(220, 38, 38, var(--tw-bg-opacity));
+}
+.bg-red-700 {
+	--tw-bg-opacity: 1;
+	background-color: rgba(185, 28, 28, var(--tw-bg-opacity));
 }
 .bg-opacity-25 {
 	--tw-bg-opacity: 0.25;
