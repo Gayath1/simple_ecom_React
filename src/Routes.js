@@ -27,12 +27,12 @@ const Path = () => {
     // console.log(user);
     return (
         <>
+            <Header/>
             <Router>
                 <Routes>
                     <Route path="/Login" exact element={<Login />} />
                     <Route path="/Register" exact element={<Register />} />
                     <Route path="/Profile" exact element={<Profile />} />
-                    <Route path="/header" exact element={<Header />} />
                 </Routes>
             </Router>
         </>

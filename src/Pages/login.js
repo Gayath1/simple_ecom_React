@@ -54,7 +54,7 @@ const Login = () => {
                         </a>
                     </p>
                 </div>
-                {error !== null && <div className = "py-4 bg-red-600 w-full text-red-600 text-center mb-3">{error}</div>}
+                {error !== null && <div className = "py-4 bg-red-600 w-full text-white text-center mb-3">{error}</div>}
                 <form className="mt-8 space-y-6">
                     <input type="hidden" name="remember" defaultValue="true" />
                     <div className="rounded-md shadow-sm -space-y-px">

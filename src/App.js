@@ -2,7 +2,6 @@
 import './App.css';
 import Routes from './Routes'
 import './styles/output.css'
-import header from './Component/Header'
 
 function App() {
 

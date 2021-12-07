@@ -618,9 +618,6 @@ video {
 .h-16 {
 	height: 4rem;
 }
-.h-8 {
-	height: 2rem;
-}
 .h-full {
 	height: 100%;
 }
@@ -933,10 +930,6 @@ video {
 .text-gray-600 {
 	--tw-text-opacity: 1;
 	color: rgba(75, 85, 99, var(--tw-text-opacity));
-}
-.text-red-600 {
-	--tw-text-opacity: 1;
-	color: rgba(220, 38, 38, var(--tw-text-opacity));
 }
 .text-indigo-500 {
 	--tw-text-opacity: 1;
