@@ -6,6 +6,7 @@ import { Link, useNavigate  } from "react-router-dom";
 import Login from '../src/Pages/login'
 import Profile from "./Pages/Profile";
 import Register from "./Pages/Register";
+import Category from "./Pages/Category";
 import Header from './Component/Header'
 
 import { auth, signInWithEmailAndPassword, signInWithGoogle } from "./firebase";
@@ -33,6 +34,7 @@ const Path = () => {
                     <Route path="/Login" exact element={<Login />} />
                     <Route path="/Register" exact element={<Register />} />
                     <Route path="/Profile" exact element={<Profile />} />
+                    <Route path="/Category" exact element={<Category />} />
                 </Routes>
             </Router>
         </>
