@@ -38,7 +38,7 @@ const navigation = {
                         { name: 'T-Shirts', href: '#' },
                         { name: 'Jackets', href: '#' },
                         { name: 'Activewear', href: '#' },
-                        { name: 'Browse All', href: '#' },
+                        { name: 'Browse All', href: '/Category/Women' },
                     ],
                 },
                 {
@@ -95,7 +95,7 @@ const navigation = {
                         { name: 'T-Shirts', href: '#' },
                         { name: 'Jackets', href: '#' },
                         { name: 'Activewear', href: '#' },
-                        { name: 'Browse All', href: '/Category' },
+                        { name: 'Browse All', href: '/Category/Men' },
                     ],
                 },
                 {
