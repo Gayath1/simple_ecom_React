@@ -55,7 +55,7 @@ const Mens_shirt =(props) => {
         },
         // More products...
     ]
-    const [blogs,setBlogs]=useState([])
+    const [data,setBlogs]=useState([])
     const [loading,setLoading]=useState(true)
 
 
@@ -65,7 +65,7 @@ const Mens_shirt =(props) => {
                 .collection("Products")
                 .get().then((snapshot) =>{
                 snapshot.forEach(doc => {
-                    blogs.push(doc.data());
+                    data.push(doc.data());
                     setBlogs((doc.data()))
                 })
             })
@@ -93,7 +93,7 @@ const Mens_shirt =(props) => {
 
             <Product_list
                 name="Mens Casual"
-                products ={blogs}
+                products ={data}
             />
             </>
     )
