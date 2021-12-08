@@ -4,49 +4,49 @@ import {Link, useNavigate} from "react-router-dom";
 const callouts = [
     {
         name: 'Home to Office',
-        description: 'Blouses & Shirts',
-        imageSrc: 'https://nilsonline.lk/image/cache/catalog/nils/product/025007512_1-612x875.jpg',
-        imageAlt: 'Women wearing a Blouse.',
+        description: 'Formal Shirt & Trousers',
+        imageSrc: 'https://cdn.vmartretail.com/images1/thumbnails/97138/640/1/143737274-97138180-1637910812.jpg',
+        imageAlt: 'Men wearing a Blue Shirt.',
         href: '#',
     },
     {
         name: 'For Every Moment',
         description: 'Jeans',
-        imageSrc: 'https://www.nolimit.lk/storage/womens-jeans/womens-denim-jeans-ladies-clothing-sri-lanka-540x600.jpg',
-        imageAlt: 'Women wearing a Blue Jean.',
+        imageSrc: 'https://n.nordstrommedia.com/id/sr3/4e182618-a6f8-4855-b3cd-2c12ac4698f6.jpeg?h=365&w=240&dpr=2',
+        imageAlt: 'Men wearing a Blue Jean.',
         href: '#',
     },
     {
         name: 'Your Choice',
-        description: 'Skirts',
-        imageSrc: 'https://m.media-amazon.com/images/I/71vxhfIeAuL._UL1500_.jpg',
-        imageAlt: 'Women wearing a Skirt.',
+        description: 'Casual Shirts & Pants',
+        imageSrc: 'https://www.nolimit.lk/storage/toys-and-books2-0013-imgl2039-540x600.jpg',
+        imageAlt: 'Men wearing a Casual Shirt.',
         href: '#',
     },
     {
         name: 'Extra care',
         description: 'Accessories',
-        imageSrc: 'https://img.joomcdn.net/8f3f0c280ce325d8756d88d2d5792e0a95dce3c7_original.jpeg',
-        imageAlt: 'Women wearing a silver and golden watch.',
+        imageSrc: 'https://5.imimg.com/data5/SELLER/Default/2020/10/AH/VU/KG/48866434/10-500x500.jpg',
+        imageAlt: 'Men wearing a Black watch.',
         href: '#',
     },
     {
         name: 'Comfort First' ,
-        description: 'Lingerie & Nightwear',
-        imageSrc: 'https://cdn.shopify.com/s/files/1/2030/2913/products/Axami-Lingerie-Bordo-Babydoll-Front_large.jpg?v=1629388785',
-        imageAlt: 'Women wearing a Red Nightwear.',
+        description: 'Inner wear',
+        imageSrc: 'https://5.imimg.com/data5/DP/LJ/MY-5343253/mens-cotton-inner-wear-500x500.jpg',
+        imageAlt: 'Men wearing a White Top.',
         href: '#',
     },
     {
         name: 'For Special Days',
         description: 'Ethnic Wear',
-        imageSrc: 'https://www.loomfolks.com/wp-content/uploads/2020/06/Formal-_-Charming-Blackish-Brown-Tussar-Staple-Saree-with-Giccha-Pallu1-570x760.jpg',
-        imageAlt: 'Women wearing a black Saree.',
+        imageSrc: 'https://www.nolimit.lk/storage/online-shoot-0123-w0a2946.jpg',
+        imageAlt: 'Men wearing a Sarong.',
         href: '#',
     },
 ]
 
-const Category_Women = () => {
+const Category_Men = () => {
     return (
         <div className="bg-gray-100">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -79,5 +79,4 @@ const Category_Women = () => {
     )
 }
 
-export default Category_Women
-
+export default Category_Men
