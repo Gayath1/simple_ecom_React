@@ -8,6 +8,7 @@ import Profile from "./Pages/Profile";
 import Register from "./Pages/Register";
 import Category_Women from "./Pages/Category_Women";
 import Category_Men from "./Pages/Category_Men";
+import Mens_shirt from "./Pages/Mens_shirt";
 import Header from './Component/Header'
 
 import { auth, signInWithEmailAndPassword, signInWithGoogle } from "./firebase";
@@ -38,6 +39,7 @@ const Path = () => {
                     <Route path="/Profile" exact element={<Profile />} />
                     <Route path="/Category/Women" exact element={<Category_Women />} />
                     <Route path="/Category/Men" exact element={<Category_Men />} />
+                    <Route path="/Items/Mens_shirt" exact element={<Mens_shirt />} />
                 </Routes>
             </Router>
         </>

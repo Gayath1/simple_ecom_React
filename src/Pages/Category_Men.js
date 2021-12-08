@@ -21,7 +21,7 @@ const callouts = [
         description: 'Casual Shirts & Pants',
         imageSrc: 'https://www.nolimit.lk/storage/toys-and-books2-0013-imgl2039-540x600.jpg',
         imageAlt: 'Men wearing a Casual Shirt.',
-        href: '#',
+        href: '/Items/Mens_shirt',
     },
     {
         name: 'Extra care',
