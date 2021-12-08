@@ -2,7 +2,10 @@ import React, {useEffect, useState} from 'react'
 import { StarIcon } from '@heroicons/react/solid'
 import { RadioGroup } from '@headlessui/react'
 import {useParams} from "react-router";
-import {db} from "../firebase";
+import {auth, db} from "../firebase";
+import { ref, set } from "../firebase";
+import firebase from "firebase/compat";
+import {useAuthState} from "react-firebase-hooks/auth";
 
 const product = {
     name: 'Basic Tee 6-Pack',
@@ -62,16 +65,17 @@ function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
 }
 const Product_overview =(props) => {
+
     const [selectedColor, setSelectedColor] = useState(product.colors[0])
     const [selectedSize, setSelectedSize] = useState(product.sizes[2])
     const [loading,setLoading]=useState(true)
     const [data,setBlogs]=useState([])
     const {id}= useParams()
-
-
+    const [user] = useAuthState(auth);
+    const [aleart, setAleart] = useState()
 
     useEffect(() => {
-
+        setAleart(false)
         const fetchBlogs=async()=> {
             const ref = db
                 .collection("Products").where("id", "==",id)
@@ -85,6 +89,30 @@ const Product_overview =(props) => {
         }
         fetchBlogs();
     }, [])
+
+    const addtocart = (e) => {
+        e.preventDefault()
+        const ref =db.collection("cart").add({
+            userId:user.uid,
+            name: data.name,
+            price:data.price,
+            imageSrc:data.imageSrc,
+            size:selectedSize.name,
+            color:selectedColor.name
+
+
+        }).then((res) => {
+            console.log('Add to cart!')
+            setAleart(true)
+        })
+            .catch(error => console.log({ errorMessage: error.message }))
+
+    }
+
+    const disbleAleart = (e) =>{
+        e.preventDefault()
+        setAleart(false)
+    }
 
     if(loading){
         return (
@@ -260,10 +288,38 @@ const Product_overview =(props) => {
                             <button
                                 type="submit"
                                 className="mt-10 w-full bg-indigo-600 border border-transparent rounded-md py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                                onClick={(e)=>addtocart(e)}
                             >
                                 Add to bag
                             </button>
                         </form>
+                        {aleart?(
+                            <div id="alert-3" className="flex mt-8 bg-green-100 rounded-lg p-4 mb-4 dark:bg-green-200"
+                                 role="alert">
+                                <svg className="w-5 h-5 text-green-700 flex-shrink-0 dark:text-green-800"
+                                     fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd"
+                                          d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
+                                          clip-rule="evenodd"></path>
+                                </svg>
+                                <div className="ml-3 text-sm font-medium text-green-700 dark:text-green-800">
+                                    Done !<a href="#" className="font-semibold hover:text-green-800 underline dark:hover:text-green-900">Add to cart
+                                    Successful.</a>
+                                </div>
+                                <button type="button"
+                                        className="ml-auto -mx-1.5 -my-1.5 bg-green-100 text-green-500 rounded-lg focus:ring-2 focus:ring-green-400 p-1.5 hover:bg-green-200 inline-flex h-8 w-8 dark:bg-green-200 dark:text-green-600 dark:hover:bg-green-300"
+                                        data-collapse-toggle="alert-3" aria-label="Close"
+                                onClick={(e)=>disbleAleart(e)}>
+                                    <span className="sr-only">Close</span>
+                                    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
+                                         xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd"
+                                              d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                                              clip-rule="evenodd"></path>
+                                    </svg>
+                                </button>
+                            </div>
+                        ):null}
                     </div>
 
                     <div className="py-10 lg:pt-6 lg:pb-16 lg:col-start-1 lg:col-span-2 lg:border-r lg:border-gray-200 lg:pr-8">
