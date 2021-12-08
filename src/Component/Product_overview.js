@@ -94,6 +94,7 @@ const Product_overview =(props) => {
         e.preventDefault()
         const ref =db.collection("cart").add({
             userId:user.uid,
+            itemId:data.id,
             name: data.name,
             price:data.price,
             imageSrc:data.imageSrc,
