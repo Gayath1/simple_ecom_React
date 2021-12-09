@@ -141,52 +141,8 @@ export default function Header() {
     const [user, error] = useAuthState(auth);
     const [data,setdata]=useState([])
     const [loading,setLoading]=useState(true)
-    const products = [
-        {
-            id: 1,
-            name: 'Throwback Hip Bag',
-            href: '#',
-            color: 'Salmon',
-            price: '$90.00',
-            quantity: 1,
-            imageSrc: 'https://tailwindui.com/img/ecommerce-images/shopping-cart-page-04-product-01.jpg',
-            imageAlt: 'Salmon orange fabric pouch with match zipper, gray zipper pull, and adjustable hip belt.',
-        },
-        {
-            id: 2,
-            name: 'Medium Stuff Satchel',
-            href: '#',
-            color: 'Blue',
-            price: '$32.00',
-            quantity: 1,
-            imageSrc: 'https://tailwindui.com/img/ecommerce-images/shopping-cart-page-04-product-02.jpg',
-            imageAlt:
-                'Front of satchel with blue canvas body, black straps and handle, drawstring top, and front zipper pouch.',
-        },
-        {
-            id: 2,
-            name: 'Medium Stuff Satchel',
-            href: '#',
-            color: 'Blue',
-            price: '$32.00',
-            quantity: 1,
-            imageSrc: 'https://tailwindui.com/img/ecommerce-images/shopping-cart-page-04-product-02.jpg',
-            imageAlt:
-                'Front of satchel with blue canvas body, black straps and handle, drawstring top, and front zipper pouch.',
-        },
-        {
-            id: 2,
-            name: 'Medium Stuff Satchel',
-            href: '#',
-            color: 'Blue',
-            price: '$32.00',
-            quantity: 1,
-            imageSrc: 'https://tailwindui.com/img/ecommerce-images/shopping-cart-page-04-product-02.jpg',
-            imageAlt:
-                'Front of satchel with blue canvas body, black straps and handle, drawstring top, and front zipper pouch.',
-        },
-        // More products...
-    ]
+    const [price, setPrice] = useState([]);
+
     const openCart = (e) =>{
         e.preventDefault()
         setCart(true)
@@ -195,6 +151,8 @@ export default function Header() {
     const closeCart =()=>{
         setCart(false)
     }
+
+
 
     useEffect(() => {
         const currentUser = auth.currentUser
@@ -210,6 +168,8 @@ export default function Header() {
                             data.push(doc.data());
                             setdata([(doc.data())])
                             setCount(data.length )
+                            const itemsPrice =  data.reduce((a, c) => a + 1* c.price, 0);
+                            setPrice(itemsPrice)
                             // console.log(data)
                         })
                     })
@@ -569,6 +529,7 @@ export default function Header() {
             status={cart}
             handler={closeCart}
             data={data}
+            price={price}
             />
         </div>
     )

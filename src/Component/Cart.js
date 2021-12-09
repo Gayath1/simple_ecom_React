@@ -1,12 +1,57 @@
 import {Fragment, useState, useContext, useEffect} from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { XIcon } from '@heroicons/react/outline'
+import {auth, db} from "../firebase";
+import {useAuthState} from "react-firebase-hooks/auth";
 
 const Cart =(props) => {
     const [open, setOpen] = useState(true)
+    const [loading,setLoading]=useState(false)
+    const [user, error] = useAuthState(auth);
 
+    const clearCart =(id) => {
+        setLoading(true)
+        const currentUser = auth.currentUser
+        if (currentUser) {
+            const uid = currentUser.uid;
 
+            const fetchBlogs = async () => {
+                const ref = await db
+                    .collection("cart").where("userId", "==", uid).where("itemId", "==", id)
+                    .get();
+                ref.forEach(element => {
+                    element.ref.delete();
+                    console.log(`deleted: ${element.id}`);
+                });
+                // .then((snapshot) => {
+                //         snapshot.forEach(doc => {
+                //             data.push(doc.data());
+                //             setdata([(doc.data())])
+                //             setCount(data.length )
+                //             const itemsPrice =  data.reduce((a, c) => a + 1* c.price, 0);
+                //             setPrice(itemsPrice)
+                //             // console.log(data)
+                //         })
+                //     })
 
+            }
+            fetchBlogs();
+        }
+        setLoading(false)
+
+    }
+
+    if(loading){
+        return (
+
+            <div  className="fixed top-0 left-0 right-0 bottom-0 w-full h-screen z-50 overflow-hidden bg-gray-700 opacity-75 flex flex-col items-center justify-center">
+                <div
+                    className="loader ease-linear rounded-full border-4 border-t-4 border-gray-200 h-12 w-12 mb-4"></div>
+                <h2 className="text-center text-white text-xl font-semibold">Loading...</h2>
+                <p className="w-1/3 text-center text-white">This may take a few seconds, please don't close this page.</p>
+            </div>
+        )
+    }
 
 
     return (
@@ -79,7 +124,8 @@ const Cart =(props) => {
                                                                     <p className="text-gray-500">Size {product.size}</p>
 
                                                                     <div className="flex">
-                                                                        <button type="button" className="font-medium text-indigo-600 hover:text-indigo-500">
+                                                                        <button type="button" className="font-medium text-indigo-600 hover:text-indigo-500"
+                                                                        onClick={()=>clearCart(product.itemId)}>
                                                                             Remove
                                                                         </button>
                                                                     </div>
@@ -95,7 +141,7 @@ const Cart =(props) => {
                                     <div className="border-t border-gray-200 py-6 px-4 sm:px-6">
                                         <div className="flex justify-between text-base font-medium text-gray-900">
                                             <p>Subtotal</p>
-                                            <p>$262.00</p>
+                                            <p>LKR{props.price}</p>
                                         </div>
                                         <p className="mt-0.5 text-sm text-gray-500">Shipping and taxes calculated at checkout.</p>
                                         <div className="mt-6">
