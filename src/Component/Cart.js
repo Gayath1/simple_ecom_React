@@ -8,38 +8,30 @@ const Cart =(props) => {
     const [open, setOpen] = useState(true)
     const [loading,setLoading]=useState(false)
     const [user, error] = useAuthState(auth);
+    const initDataShow = props.data
+    const [dataShow, setDataShow] = useState(initDataShow);
 
-    const clearCart =(id) => {
-        setLoading(true)
-        const currentUser = auth.currentUser
-        if (currentUser) {
-            const uid = currentUser.uid;
-
-            const fetchBlogs = async () => {
-                const ref = await db
-                    .collection("cart").where("userId", "==", uid).where("itemId", "==", id)
-                    .get();
-                ref.forEach(element => {
-                    element.ref.delete();
-                    console.log(`deleted: ${element.id}`);
-                });
-                // .then((snapshot) => {
-                //         snapshot.forEach(doc => {
-                //             data.push(doc.data());
-                //             setdata([(doc.data())])
-                //             setCount(data.length )
-                //             const itemsPrice =  data.reduce((a, c) => a + 1* c.price, 0);
-                //             setPrice(itemsPrice)
-                //             // console.log(data)
-                //         })
-                //     })
-
-            }
-            fetchBlogs();
-        }
-        setLoading(false)
-
-    }
+    // const clearCart =(id) => {
+    //     setLoading(true)
+    //     const currentUser = auth.currentUser
+    //     if (currentUser) {
+    //         const uid = currentUser.uid;
+    //
+    //         const fetchBlogs = async () => {
+    //             const ref = await db
+    //                 .collection("cart").where("userId", "==", uid).where("itemId", "==", id)
+    //                 .get();
+    //             ref.forEach(element => {
+    //                 element.ref.delete();
+    //                 console.log(`deleted: ${element.id}`);
+    //             });
+    //         }
+    //         fetchBlogs();
+    //
+    //     }
+    //     setLoading(false)
+    //
+    // }
 
     if(loading){
         return (
@@ -100,7 +92,7 @@ const Cart =(props) => {
                                         <div className="mt-8">
                                             <div className="flow-root">
                                                 <ul role="list" className="-my-6 divide-y divide-gray-200">
-                                                    {props.data.map((product) => (
+                                                    {dataShow.map((product) => (
                                                         <li key={product.id} className="py-6 flex">
                                                             <div className="flex-shrink-0 w-24 h-24 border border-gray-200 rounded-md overflow-hidden">
                                                                 <img
@@ -125,7 +117,7 @@ const Cart =(props) => {
 
                                                                     <div className="flex">
                                                                         <button type="button" className="font-medium text-indigo-600 hover:text-indigo-500"
-                                                                        onClick={()=>clearCart(product.itemId)}>
+                                                                        onClick={()=>props.clear(product.itemId)}>
                                                                             Remove
                                                                         </button>
                                                                     </div>

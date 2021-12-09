@@ -182,6 +182,27 @@ export default function Header() {
 
     }, [auth,user, loading])
 
+    const clearCart =(id) => {
+        const currentUser = auth.currentUser
+        if (currentUser) {
+            const uid = currentUser.uid;
+
+            const fetchBlogs = async () => {
+                const ref = await db
+                    .collection("cart").where("userId", "==", uid).where("itemId", "==", id)
+                    .get();
+                ref.forEach(element => {
+                    element.ref.delete();
+                    console.log(`deleted: ${element.id}`);
+                });
+            }
+            fetchBlogs();
+            window.location.reload();
+
+        }
+
+    }
+
     if(loading){
         return (
 
@@ -476,28 +497,6 @@ export default function Header() {
                                         Create account
                                     </a>
                                 </div>)}
-                                {/*<div className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-6">*/}
-                                {/*    <a href="/Login" className="text-sm font-medium text-gray-700 hover:text-gray-800">*/}
-                                {/*        {user?.email}*/}
-                                {/*        Sign in*/}
-                                {/*    </a>*/}
-                                {/*    <span className="h-6 w-px bg-gray-200" aria-hidden="true" />*/}
-                                {/*    <a href="/Register" className="text-sm font-medium text-gray-700 hover:text-gray-800">*/}
-                                {/*        Create account*/}
-                                {/*    </a>*/}
-                                {/*</div>*/}
-
-                                {/*<div className="hidden lg:ml-8 lg:flex">*/}
-                                {/*    <a href="#" className="text-gray-700 hover:text-gray-800 flex items-center">*/}
-                                {/*        <img*/}
-                                {/*            src="https://tailwindui.com/img/flags/flag-canada.svg"*/}
-                                {/*            alt=""*/}
-                                {/*            className="w-5 h-auto block flex-shrink-0"*/}
-                                {/*        />*/}
-                                {/*        <span className="ml-3 block text-sm font-medium">CAD</span>*/}
-                                {/*        <span className="sr-only">, change currency</span>*/}
-                                {/*    </a>*/}
-                                {/*</div>*/}
 
                                 {/* Search */}
                                 <div className="flex lg:ml-6">
@@ -528,6 +527,7 @@ export default function Header() {
             <Cart
             status={cart}
             handler={closeCart}
+            clear={clearCart}
             data={data}
             price={price}
             />

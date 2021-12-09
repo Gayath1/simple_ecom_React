@@ -107,10 +107,13 @@ const Product_overview =(props) => {
         }).then((res) => {
             console.log('Add to cart!')
             setAleart(true)
+            window.location.reload();
         })
             .catch(error => console.log({ errorMessage: error.message }))
 
     }
+
+
 
     const disbleAleart = (e) =>{
         e.preventDefault()
