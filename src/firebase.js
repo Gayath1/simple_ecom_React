@@ -1,6 +1,7 @@
 import firebase from "firebase/compat/app"
 import "firebase/compat/auth"
 import "firebase/compat/firestore"
+
 const firebaseConfig = {
     apiKey: "AIzaSyCig8jofLVPBjzhLIk7SVDLNI0LE6o6Rw0",
     authDomain: "simple-ecom-bc829.firebaseapp.com",
@@ -12,6 +13,7 @@ const firebaseConfig = {
 const app = firebase.initializeApp(firebaseConfig);
 const auth = app.auth();
 const db = app.firestore();
+
 const googleProvider = new firebase.auth.GoogleAuthProvider();
 const signInWithGoogle = async () => {
     try {

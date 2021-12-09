@@ -10,7 +10,9 @@ import Category_Women from "./Pages/Category_Women";
 import Category_Men from "./Pages/Category_Men";
 import Mens_shirt from "./Pages/Mens_shirt";
 import Product_overview from "./Component/Product_overview";
+import Cart from "./Component/Cart";
 import Header from './Component/Header'
+
 
 import { auth, signInWithEmailAndPassword, signInWithGoogle } from "./firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
@@ -20,6 +22,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 const Path = () => {
     
     const [user, loading, error] = useAuthState(auth);
+
     // const history = useNavigate();
     // useEffect(() => {
     //     if (loading) {
@@ -42,6 +45,7 @@ const Path = () => {
                     <Route path="/Category/Men" exact element={<Category_Men />} />
                     <Route path="/Items/Mens_shirt" exact element={<Mens_shirt />} />
                     <Route path="/Item/:id" exact element={<Product_overview />} />
+                    <Route path="/Cart" exact element={<Cart />} />
                 </Routes>
             </Router>
         </>

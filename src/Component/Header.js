@@ -1,9 +1,10 @@
 
-import React, {Fragment, useEffect, useState} from 'react'
+import React, {Fragment, useEffect, useState, useContext} from 'react'
 import { Dialog, Popover, Tab, Transition } from '@headlessui/react'
 import { MenuIcon, SearchIcon, ShoppingBagIcon, XIcon } from '@heroicons/react/outline'
 import {useAuthState} from "react-firebase-hooks/auth";
-import {auth} from "../firebase";
+import {auth, db} from "../firebase";
+import Cart from "./Cart";
 
 
 const navigation = {
@@ -135,13 +136,103 @@ function classNames(...classes) {
 
 export default function Header() {
     const [open, setOpen] = useState(false)
-    const [user, loading, error] = useAuthState(auth);
+    const [ cart,setCart ] = useState(false)
+    const [ count,setCount ] = useState(false)
+    const [user, error] = useAuthState(auth);
+    const [data,setdata]=useState([])
+    const [loading,setLoading]=useState(true)
+    const products = [
+        {
+            id: 1,
+            name: 'Throwback Hip Bag',
+            href: '#',
+            color: 'Salmon',
+            price: '$90.00',
+            quantity: 1,
+            imageSrc: 'https://tailwindui.com/img/ecommerce-images/shopping-cart-page-04-product-01.jpg',
+            imageAlt: 'Salmon orange fabric pouch with match zipper, gray zipper pull, and adjustable hip belt.',
+        },
+        {
+            id: 2,
+            name: 'Medium Stuff Satchel',
+            href: '#',
+            color: 'Blue',
+            price: '$32.00',
+            quantity: 1,
+            imageSrc: 'https://tailwindui.com/img/ecommerce-images/shopping-cart-page-04-product-02.jpg',
+            imageAlt:
+                'Front of satchel with blue canvas body, black straps and handle, drawstring top, and front zipper pouch.',
+        },
+        {
+            id: 2,
+            name: 'Medium Stuff Satchel',
+            href: '#',
+            color: 'Blue',
+            price: '$32.00',
+            quantity: 1,
+            imageSrc: 'https://tailwindui.com/img/ecommerce-images/shopping-cart-page-04-product-02.jpg',
+            imageAlt:
+                'Front of satchel with blue canvas body, black straps and handle, drawstring top, and front zipper pouch.',
+        },
+        {
+            id: 2,
+            name: 'Medium Stuff Satchel',
+            href: '#',
+            color: 'Blue',
+            price: '$32.00',
+            quantity: 1,
+            imageSrc: 'https://tailwindui.com/img/ecommerce-images/shopping-cart-page-04-product-02.jpg',
+            imageAlt:
+                'Front of satchel with blue canvas body, black straps and handle, drawstring top, and front zipper pouch.',
+        },
+        // More products...
+    ]
+    const openCart = (e) =>{
+        e.preventDefault()
+        setCart(true)
+    }
+
+    const closeCart =()=>{
+        setCart(false)
+    }
 
     useEffect(() => {
-        if (loading) return;
+        const currentUser = auth.currentUser
+        if (currentUser) {
+            const uid = currentUser.uid;
 
-        // fetchUserName();
-    }, [user, loading]);
+            console.log("user", auth.currentUser?.uid);
+            const fetchBlogs = async () => {
+                const ref = db
+                    .collection("cart").where("userId", "==", uid)
+                    .get().then((snapshot) => {
+                        snapshot.forEach(doc => {
+                            data.push(doc.data());
+                            setdata([(doc.data())])
+                            setCount(data.length )
+                            // console.log(data)
+                        })
+                    })
+
+            }
+            fetchBlogs();
+        }
+        setLoading(false)
+
+
+    }, [auth,user, loading])
+
+    if(loading){
+        return (
+
+            <div  className="fixed top-0 left-0 right-0 bottom-0 w-full h-screen z-50 overflow-hidden bg-gray-700 opacity-75 flex flex-col items-center justify-center">
+                <div
+                    className="loader ease-linear rounded-full border-4 border-t-4 border-gray-200 h-12 w-12 mb-4"></div>
+                <h2 className="text-center text-white text-xl font-semibold">Loading...</h2>
+                <p className="w-1/3 text-center text-white">This may take a few seconds, please don't close this page.</p>
+            </div>
+        )
+    }
 
     return (
         <div className="bg-white z-50">
@@ -462,8 +553,9 @@ export default function Header() {
                                         <ShoppingBagIcon
                                             className="flex-shrink-0 h-6 w-6 text-gray-400 group-hover:text-gray-500"
                                             aria-hidden="true"
+                                            onClick={(e)=>openCart(e)}
                                         />
-                                        <span className="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800">0</span>
+                                        <span className="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800">{count}</span>
                                         <span className="sr-only">items in cart, view bag</span>
                                     </a>
                                 </div>
@@ -472,6 +564,12 @@ export default function Header() {
                     </div>
                 </nav>
             </header>
+
+            <Cart
+            status={cart}
+            handler={closeCart}
+            data={data}
+            />
         </div>
     )
 }

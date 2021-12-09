@@ -3,9 +3,10 @@ import { StarIcon } from '@heroicons/react/solid'
 import { RadioGroup } from '@headlessui/react'
 import {useParams} from "react-router";
 import {auth, db} from "../firebase";
-import { ref, set } from "../firebase";
-import firebase from "firebase/compat";
 import {useAuthState} from "react-firebase-hooks/auth";
+
+
+
 
 const product = {
     name: 'Basic Tee 6-Pack',
@@ -72,6 +73,8 @@ const Product_overview =(props) => {
     const [data,setBlogs]=useState([])
     const {id}= useParams()
     const [user] = useAuthState(auth);
+    const [cart, setCart] = useState(false);
+    const [count, setCount] = useState(1);
     const [aleart, setAleart] = useState()
 
     useEffect(() => {
@@ -100,7 +103,6 @@ const Product_overview =(props) => {
             imageSrc:data.imageSrc,
             size:selectedSize.name,
             color:selectedColor.name
-
 
         }).then((res) => {
             console.log('Add to cart!')
