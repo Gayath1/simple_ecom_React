@@ -93,9 +93,31 @@ const Product_overview =(props) => {
         fetchBlogs();
     }, [])
 
+    // const addtocart = (e) => {
+    //     e.preventDefault()
+    //     const ref =db.collection("cart").add({
+    //         userId:user.uid,
+    //         itemId:data.id,
+    //         name: data.name,
+    //         price:data.price,
+    //         imageSrc:data.imageSrc,
+    //         size:selectedSize.name,
+    //         color:selectedColor.name
+    //
+    //     }).then((res) => {
+    //         console.log('Add to cart!')
+    //         setAleart(true)
+    //         window.location.reload();
+    //     })
+    //         .catch(error => console.log({ errorMessage: error.message }))
+    //
+    // }
+
     const addtocart = (e) => {
         e.preventDefault()
-        const ref =db.collection("cart").add({
+        const ref =db.collection("cart").doc();
+        ref.set({
+            autoId:ref.id,
             userId:user.uid,
             itemId:data.id,
             name: data.name,

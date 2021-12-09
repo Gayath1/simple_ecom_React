@@ -141,7 +141,7 @@ export default function Header() {
     const [user, error] = useAuthState(auth);
     const [data,setdata]=useState([])
     const [loading,setLoading]=useState(true)
-    const [price, setPrice] = useState([]);
+    const [price, setPrice] = useState(0);
 
     const openCart = (e) =>{
         e.preventDefault()
@@ -152,14 +152,12 @@ export default function Header() {
         setCart(false)
     }
 
-
-
-    useEffect(() => {
+    const getData =() => {
+        setLoading(true)
         const currentUser = auth.currentUser
         if (currentUser) {
             const uid = currentUser.uid;
 
-            console.log("user", auth.currentUser?.uid);
             const fetchBlogs = async () => {
                 const ref = db
                     .collection("cart").where("userId", "==", uid)
@@ -178,30 +176,60 @@ export default function Header() {
             fetchBlogs();
         }
         setLoading(false)
+    }
+
+    const reload = () =>{
+        window.location.reload();
+    }
 
 
-    }, [auth,user, loading])
+    const removeItemFromBasket = (autoId)=> {
+        let filteredArray = data.filter(item => item.autoId !== autoId)
+         setdata(filteredArray)
 
-    const clearCart =(id) => {
+    }
+
+
+
+    const clearCart =(autoId) => {
+        removeItemFromBasket(autoId)
+
         const currentUser = auth.currentUser
         if (currentUser) {
             const uid = currentUser.uid;
 
-            const fetchBlogs = async () => {
-                const ref = await db
-                    .collection("cart").where("userId", "==", uid).where("itemId", "==", id)
+            const fetchBlogs1 = async () => {
+                const ref =  await db
+                    .collection("cart").where("userId", "==", uid).where("autoId", "==", autoId)
                     .get();
+                    // .get().then((snapshot) => {
+                    //     snapshot.forEach(doc => {
+                    //         doc.ref.delete()
+                    //         console.log(`deleted: ${doc.id}`);
+                    //         setLoading(false)
+                    //         reload()
+                    //     })
+                    // })
+
                 ref.forEach(element => {
-                    element.ref.delete();
+                    element.ref.delete()
                     console.log(`deleted: ${element.id}`);
                 });
             }
-            fetchBlogs();
-            window.location.reload();
-
+            fetchBlogs1();
         }
 
     }
+
+    useEffect(() => {
+        // const itemsPrice =  data.reduce((a, c) => a + 1* c.price, 0);
+        // setPrice(itemsPrice)
+
+        getData()
+
+    }, [auth,user, loading])
+
+
 
     if(loading){
         return (

@@ -117,7 +117,7 @@ const Cart =(props) => {
 
                                                                     <div className="flex">
                                                                         <button type="button" className="font-medium text-indigo-600 hover:text-indigo-500"
-                                                                        onClick={()=>props.clear(product.itemId)}>
+                                                                        onClick={()=>props.clear(product.autoId)}>
                                                                             Remove
                                                                         </button>
                                                                     </div>
