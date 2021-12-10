@@ -1,7 +1,7 @@
-
 import './App.css';
 import Routes from './Routes'
 import './styles/output.css'
+
 
 function App() {
 
@@ -9,7 +9,9 @@ function App() {
 
   return (
       <>
+
                 <Routes/>
+
       </>
 
   );

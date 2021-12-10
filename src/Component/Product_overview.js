@@ -124,12 +124,12 @@ const Product_overview =(props) => {
             price:data.price,
             imageSrc:data.imageSrc,
             size:selectedSize.name,
-            color:selectedColor.name
+            color:selectedColor.name,
+            quantity:data.quantity,
 
         }).then((res) => {
             console.log('Add to cart!')
             setAleart(true)
-            window.location.reload();
         })
             .catch(error => console.log({ errorMessage: error.message }))
 

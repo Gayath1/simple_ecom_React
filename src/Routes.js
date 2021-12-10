@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, {useContext, useEffect, useState} from 'react'
 
 import {BrowserRouter as Router, Route, Routes} from "react-router-dom";
 import { Link, useNavigate  } from "react-router-dom";
@@ -20,7 +20,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 
 
 const Path = () => {
-    
+
     const [user, loading, error] = useAuthState(auth);
 
     // const history = useNavigate();
@@ -37,6 +37,7 @@ const Path = () => {
         <>
             <Header/>
             <Router>
+
                 <Routes>
                     <Route path="/Login" exact element={<Login />} />
                     <Route path="/Register" exact element={<Register />} />
@@ -47,6 +48,7 @@ const Path = () => {
                     <Route path="/Item/:id" exact element={<Product_overview />} />
                     <Route path="/Cart" exact element={<Cart />} />
                 </Routes>
+
             </Router>
         </>
 

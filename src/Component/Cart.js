@@ -1,37 +1,39 @@
-import {Fragment, useState, useContext, useEffect} from 'react'
-import { Dialog, Transition } from '@headlessui/react'
-import { XIcon } from '@heroicons/react/outline'
+import {Fragment, useContext, useEffect, useState} from 'react'
+import {Dialog, Transition} from '@headlessui/react'
+import {XIcon} from '@heroicons/react/outline'
 import {auth, db} from "../firebase";
 import {useAuthState} from "react-firebase-hooks/auth";
+
 
 const Cart =(props) => {
     const [open, setOpen] = useState(true)
     const [loading,setLoading]=useState(false)
     const [user, error] = useAuthState(auth);
-    const initDataShow = props.data
-    const [dataShow, setDataShow] = useState(initDataShow);
+    const [cart, setCart] = useState([])
 
-    // const clearCart =(id) => {
-    //     setLoading(true)
-    //     const currentUser = auth.currentUser
-    //     if (currentUser) {
-    //         const uid = currentUser.uid;
-    //
-    //         const fetchBlogs = async () => {
-    //             const ref = await db
-    //                 .collection("cart").where("userId", "==", uid).where("itemId", "==", id)
-    //                 .get();
-    //             ref.forEach(element => {
-    //                 element.ref.delete();
-    //                 console.log(`deleted: ${element.id}`);
-    //             });
-    //         }
-    //         fetchBlogs();
-    //
-    //     }
-    //     setLoading(false)
-    //
-    // }
+
+    useEffect(() => {
+        db.collection("cart")
+            .onSnapshot((querySnapshot) => {
+                var p = [];
+                querySnapshot.forEach((doc) => {
+                    p.push(doc.data());
+                });
+
+                setCart(p)
+            });
+
+    }, []);
+
+    function total() {
+        let x = 0
+        cart.map((i) => {
+            x += i.price * i.quantity
+
+        })
+        return x
+    }
+
 
     if(loading){
         return (
@@ -92,7 +94,7 @@ const Cart =(props) => {
                                         <div className="mt-8">
                                             <div className="flow-root">
                                                 <ul role="list" className="-my-6 divide-y divide-gray-200">
-                                                    {dataShow.map((product) => (
+                                                    {cart.map((product) => (
                                                         <li key={product.id} className="py-6 flex">
                                                             <div className="flex-shrink-0 w-24 h-24 border border-gray-200 rounded-md overflow-hidden">
                                                                 <img
@@ -133,7 +135,7 @@ const Cart =(props) => {
                                     <div className="border-t border-gray-200 py-6 px-4 sm:px-6">
                                         <div className="flex justify-between text-base font-medium text-gray-900">
                                             <p>Subtotal</p>
-                                            <p>LKR{props.price}</p>
+                                            <p>LKR{total()}</p>
                                         </div>
                                         <p className="mt-0.5 text-sm text-gray-500">Shipping and taxes calculated at checkout.</p>
                                         <div className="mt-6">

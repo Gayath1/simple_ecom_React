@@ -137,11 +137,12 @@ function classNames(...classes) {
 export default function Header() {
     const [open, setOpen] = useState(false)
     const [ cart,setCart ] = useState(false)
-    const [ count,setCount ] = useState(false)
+    const [ count,setCount ] = useState(0)
     const [user, error] = useAuthState(auth);
     const [data,setdata]=useState([])
-    const [loading,setLoading]=useState(true)
+    const [loading,setLoading]=useState(false)
     const [price, setPrice] = useState(0);
+
 
     const openCart = (e) =>{
         e.preventDefault()
@@ -152,48 +153,12 @@ export default function Header() {
         setCart(false)
     }
 
-    const getData =() => {
-        setLoading(true)
-        const currentUser = auth.currentUser
-        if (currentUser) {
-            const uid = currentUser.uid;
-
-            const fetchBlogs = async () => {
-                const ref = db
-                    .collection("cart").where("userId", "==", uid)
-                    .get().then((snapshot) => {
-                        snapshot.forEach(doc => {
-                            data.push(doc.data());
-                            setdata([(doc.data())])
-                            setCount(data.length )
-                            const itemsPrice =  data.reduce((a, c) => a + 1* c.price, 0);
-                            setPrice(itemsPrice)
-                            // console.log(data)
-                        })
-                    })
-
-            }
-            fetchBlogs();
-        }
-        setLoading(false)
-    }
-
-    const reload = () =>{
-        window.location.reload();
-    }
 
 
-    const removeItemFromBasket = (autoId)=> {
-        let filteredArray = data.filter(item => item.autoId !== autoId)
-         setdata(filteredArray)
-
-    }
 
 
 
     const clearCart =(autoId) => {
-        removeItemFromBasket(autoId)
-
         const currentUser = auth.currentUser
         if (currentUser) {
             const uid = currentUser.uid;
@@ -222,10 +187,15 @@ export default function Header() {
     }
 
     useEffect(() => {
-        // const itemsPrice =  data.reduce((a, c) => a + 1* c.price, 0);
-        // setPrice(itemsPrice)
+        db.collection("cart")
+            .onSnapshot((querySnapshot) => {
+                var p = [];
+                querySnapshot.forEach((doc) => {
+                    p.push(doc.data());
+                });
 
-        getData()
+                setCount(p.length)
+            });
 
     }, [auth,user, loading])
 
@@ -556,8 +526,6 @@ export default function Header() {
             status={cart}
             handler={closeCart}
             clear={clearCart}
-            data={data}
-            price={price}
             />
         </div>
     )
