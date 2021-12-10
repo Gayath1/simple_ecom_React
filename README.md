@@ -25,6 +25,7 @@ You will also see any lint errors in the console.
 
 ## :writing_hand: Things can do 
 
+* landing page
 * Order completion
 * Order history
 * Admin side
