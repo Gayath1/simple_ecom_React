@@ -23,7 +23,7 @@ You will also see any lint errors in the console.
 * Tailwind UI -first try
 * firebase - for auth and database
 
-### :writing_hand: Things can do 
+## :writing_hand: Things can do 
 
 * Order completion
 * Order history
