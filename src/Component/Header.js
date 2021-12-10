@@ -90,8 +90,8 @@ const navigation = {
                     id: 'clothing',
                     name: 'Clothing',
                     items: [
-                        { name: 'Tops', href: '#' },
-                        { name: 'Pants', href: '#' },
+                        { name: 'Tops', href: '/Items/Mens_shirt' },
+                        { name: 'Pants', href: '/Items/Mens_shirt' },
                         { name: 'Sweaters', href: '#' },
                         { name: 'T-Shirts', href: '#' },
                         { name: 'Jackets', href: '#' },
