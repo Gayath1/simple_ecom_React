@@ -116,6 +116,16 @@ const Cart =(props) => {
                                                                 </div>
                                                                 <div className="flex-1 flex items-end justify-between text-sm">
                                                                     <p className="text-gray-500">Size {product.size}</p>
+                                                                    <div>
+                                                                        <button className="px-3 py-0 shadow" onClick={()=>props.decrease(product.autoId)}>-</button>
+                                                                        <input
+                                                                            type="text"
+                                                                            name="qty"
+                                                                            value={product.quantity}
+                                                                            className="w-12 h-15 text-center bg-gray-100 outline-none"
+                                                                        />
+                                                                        <button className="px-3 py-0 shadow" onClick={()=>props.increase(product.autoId)}>+</button>
+                                                                    </div>
 
                                                                     <div className="flex">
                                                                         <button type="button" className="font-medium text-indigo-600 hover:text-indigo-500"

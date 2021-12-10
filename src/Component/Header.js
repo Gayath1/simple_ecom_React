@@ -3,7 +3,7 @@ import React, {Fragment, useEffect, useState, useContext} from 'react'
 import { Dialog, Popover, Tab, Transition } from '@headlessui/react'
 import { MenuIcon, SearchIcon, ShoppingBagIcon, XIcon } from '@heroicons/react/outline'
 import {useAuthState} from "react-firebase-hooks/auth";
-import {auth, db} from "../firebase";
+import {auth, db, fs} from "../firebase";
 import Cart from "./Cart";
 
 
@@ -154,7 +154,14 @@ export default function Header() {
     }
 
 
+    function increase(autoId) {
+        db.collection('cart').doc(`${autoId}`).update("quantity", fs.firestore.FieldValue.increment(1))
 
+    }
+
+    function decrease(autoId) {
+        db.collection('cart').doc(`${autoId}`).update("quantity", fs.firestore.FieldValue.increment(-1))
+    }
 
 
 
@@ -526,6 +533,8 @@ export default function Header() {
             status={cart}
             handler={closeCart}
             clear={clearCart}
+            increase={increase}
+            decrease={decrease}
             />
         </div>
     )
