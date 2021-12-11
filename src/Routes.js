@@ -9,6 +9,7 @@ import Register from "./Pages/Register";
 import Category_Women from "./Pages/Category_Women";
 import Category_Men from "./Pages/Category_Men";
 import Mens_shirt from "./Pages/Mens_shirt";
+import Home from "./Pages/Home";
 
 import Product_overview from "./Component/Product_overview";
 import Cart from "./Component/Cart";
@@ -42,6 +43,7 @@ const Path = () => {
             <Router>
 
                 <Routes>
+                    <Route path="/" exact element={<Home />} />
                     <Route path="/Login" exact element={<Login />} />
                     <Route path="/Register" exact element={<Register />} />
                     <Route path="/Profile" exact element={<Profile />} />
