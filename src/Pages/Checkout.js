@@ -26,7 +26,7 @@ const Checkout =() => {
     function total() {
         let x = 0
         cart.map((i) => {
-            x +=( i.price * i.quantity) + 10
+            x +=( i.price * i.quantity) + 300
 
         })
         return x
@@ -48,28 +48,28 @@ const Checkout =() => {
             <div className="flex flex-col md:w-full">
                 <h2 className="mb-4 font-bold md:text-xl text-heading ">Shipping Address
                 </h2>
-                <form className="justify-center w-full mx-auto" method="post" action>
+                <form className="justify-center w-full mx-auto">
                     <div className="">
                         <div className="space-x-0 lg:flex lg:space-x-4">
                             <div className="w-full lg:w-1/2">
                                 <label htmlFor="firstName" className="block mb-3 text-sm font-semibold text-gray-500">First
                                     Name</label>
                                 <input name="firstName" type="text" placeholder="First Name"
-                                       className="w-full px-4 py-3 text-sm border border-gray-300 rounded lg:text-sm focus:outline-none focus:ring-1 focus:ring-blue-600"/>
+                                       className="w-full px-4 py-3 text-sm border border-gray-300 rounded lg:text-sm focus:outline-none focus:ring-1 focus:ring-blue-600" required/>
                             </div>
                             <div className="w-full lg:w-1/2 ">
                                 <label htmlFor="firstName" className="block mb-3 text-sm font-semibold text-gray-500">Last
                                     Name</label>
                                 <input name="Last Name" type="text" placeholder="Last Name"
-                                       className="w-full px-4 py-3 text-sm border border-gray-300 rounded lg:text-sm focus:outline-none focus:ring-1 focus:ring-blue-600"/>
+                                       className="w-full px-4 py-3 text-sm border border-gray-300 rounded lg:text-sm focus:outline-none focus:ring-1 focus:ring-blue-600" required/>
                             </div>
                         </div>
                         <div className="mt-4">
                             <div className="w-full">
                                 <label htmlFor="Email"
                                        className="block mb-3 text-sm font-semibold text-gray-500">Email</label>
-                                <input name="Last Name" type="text" placeholder="Email"
-                                       className="w-full px-4 py-3 text-sm border border-gray-300 rounded lg:text-sm focus:outline-none focus:ring-1 focus:ring-blue-600"/>
+                                <input name="Last Name" type="email" placeholder="Email"
+                                       className="w-full px-4 py-3 text-sm border border-gray-300 rounded lg:text-sm focus:outline-none focus:ring-1 focus:ring-blue-600" required/>
                             </div>
                         </div>
                         <div className="mt-4">
@@ -78,7 +78,7 @@ const Checkout =() => {
                                        className="block mb-3 text-sm font-semibold text-gray-500">Address</label>
                                 <textarea
     className="w-full px-4 py-3 text-xs border border-gray-300 rounded lg:text-sm focus:outline-none focus:ring-1 focus:ring-blue-600"
-    name="Address" cols="20" rows="4" placeholder="Address"/>
+    name="Address" cols="20" rows="4" placeholder="Address" required/>
                             </div>
                         </div>
                         <div className="space-x-0 lg:flex lg:space-x-4">
@@ -86,13 +86,13 @@ const Checkout =() => {
                                 <label htmlFor="city"
                                        className="block mb-3 text-sm font-semibold text-gray-500">City</label>
                                 <input name="city" type="text" placeholder="City"
-                                       className="w-full px-4 py-3 text-sm border border-gray-300 rounded lg:text-sm focus:outline-none focus:ring-1 focus:ring-blue-600"/>
+                                       className="w-full px-4 py-3 text-sm border border-gray-300 rounded lg:text-sm focus:outline-none focus:ring-1 focus:ring-blue-600" required/>
                             </div>
                             <div className="w-full lg:w-1/2 ">
                                 <label htmlFor="postcode" className="block mb-3 text-sm font-semibold text-gray-500">
                                     Postcode</label>
-                                <input name="postcode" type="text" placeholder="Post Code"
-                                       className="w-full px-4 py-3 text-sm border border-gray-300 rounded lg:text-sm focus:outline-none focus:ring-1 focus:ring-blue-600"/>
+                                <input name="postcode" type="number" min="0" placeholder="Post Code"
+                                       className="w-full px-4 py-3 text-sm border border-gray-300 rounded lg:text-sm focus:outline-none focus:ring-1 focus:ring-blue-600" required/>
                             </div>
                         </div>
                         <div className="flex items-center mt-4">
