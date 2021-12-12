@@ -64,6 +64,13 @@ const Checkout =() => {
         }).then((res) => {
             clearCart()
             console.log('Order done!')
+            setFirstName("");
+            setLastName("");
+            setEmail("");
+            setAddress("");
+            setCity("");
+            setPostCode("");
+            setNotes("");
             setAleart(true)
         })
             .catch(error => console.log({ errorMessage: error.message }))
