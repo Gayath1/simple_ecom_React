@@ -10,6 +10,7 @@ import Category_Women from "./Pages/Category_Women";
 import Category_Men from "./Pages/Category_Men";
 import Mens_shirt from "./Pages/Mens_shirt";
 import Home from "./Pages/Home";
+import Checkout from "./Pages/Checkout";
 
 import Product_overview from "./Component/Product_overview";
 import Cart from "./Component/Cart";
@@ -52,6 +53,7 @@ const Path = () => {
                     <Route path="/Items/Mens_shirt" exact element={<Mens_shirt />} />
                     <Route path="/Item/:id" exact element={<Product_overview />} />
                     <Route path="/Cart" exact element={<Cart />} />
+                    <Route path="/Checkout" exact element={<Checkout />} />
                 </Routes>
 
             </Router>

@@ -194,15 +194,20 @@ export default function Header() {
     }
 
     useEffect(() => {
-        db.collection("cart")
-            .onSnapshot((querySnapshot) => {
-                var p = [];
-                querySnapshot.forEach((doc) => {
-                    p.push(doc.data());
+        const currentUser = auth.currentUser
+        if (currentUser) {
+            const uid = currentUser.uid;
+            db.collection("cart").where("userId", "==", uid)
+                .onSnapshot((querySnapshot) => {
+                    var p = [];
+                    querySnapshot.forEach((doc) => {
+                        p.push(doc.data());
+                    });
+
+                    setCount(p.length)
                 });
 
-                setCount(p.length)
-            });
+        }
 
     }, [auth,user, loading])
 

@@ -13,17 +13,20 @@ const Cart =(props) => {
 
 
     useEffect(() => {
-        db.collection("cart")
-            .onSnapshot((querySnapshot) => {
-                var p = [];
-                querySnapshot.forEach((doc) => {
-                    p.push(doc.data());
+        const currentUser = auth.currentUser
+        if (currentUser) {
+            const uid = currentUser.uid;
+            db.collection("cart").where("userId", "==", uid)
+                .onSnapshot((querySnapshot) => {
+                    var p = [];
+                    querySnapshot.forEach((doc) => {
+                        p.push(doc.data());
+                    });
+
+                    setCart(p)
                 });
-
-                setCart(p)
-            });
-
-    }, []);
+        }
+    }, [user]);
 
     function total() {
         let x = 0
@@ -150,7 +153,7 @@ const Cart =(props) => {
                                         <p className="mt-0.5 text-sm text-gray-500">Shipping and taxes calculated at checkout.</p>
                                         <div className="mt-6">
                                             <a
-                                                href="#"
+                                                href="/Checkout"
                                                 className="flex justify-center items-center px-6 py-3 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700"
                                             >
                                                 Checkout
