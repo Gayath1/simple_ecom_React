@@ -107,11 +107,19 @@ const Checkout =() => {
     className="flex items-center w-full px-4 py-3 text-sm border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-blue-600"
     rows="4" placeholder="Notes for delivery"/>
                         </div>
-                        <div className="mt-4">
-                            <button
-                                className="w-full px-6 py-2 text-blue-200 bg-blue-600 hover:bg-blue-900">Process
-                            </button>
-                        </div>
+                        {cart ?(
+                            <div className="mt-4">
+                                <button
+                                    className="w-full px-6 py-2 text-blue-200 bg-blue-600 hover:bg-blue-900">Process
+                                </button>
+                            </div>
+                        ):(
+                            <div className="mt-4">
+                                <button
+                                    className="w-full px-6 py-2 text-blue-200 bg-blue-600 hover:bg-blue-900 cursor-not-allowed">Process
+                                </button>
+                            </div>
+                        )}
                     </div>
                 </form>
             </div>
@@ -132,20 +140,11 @@ const Checkout =() => {
                                     <p className="text-sm">{product.quantity}</p>
                                     <span className="text-red-600">Price</span> LKR{product.price}
                                 </div>
-                                <div>
-                                    <svg xmlns="http://www.w3.org/2000/svg" className="w-6 h-6" fill="none"
-                                         viewBox="0 0 24 24" stroke="currentColor">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
-                                              d="M6 18L18 6M6 6l12 12"/>
-                                    </svg>
-                                </div>
+
                             </div>
                             ))}
                         </div>
                     </div>
-                    {/*<div className="flex p-4 mt-4">*/}
-                    {/*    <h2 className="text-xl font-bold">ITEMS 2</h2>*/}
-                    {/*</div>*/}
                     <div
                         className="flex items-center w-full py-4 text-sm font-semibold border-b border-gray-300 lg:py-5 lg:px-3 text-heading last:border-b-0 last:text-base last:pb-0">
                         Subtotal<span className="ml-2">LKR {subtotal()}</span></div>
