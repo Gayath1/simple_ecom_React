@@ -25,7 +25,8 @@ You will also see any lint errors in the console.
 
 ## :writing_hand: Things can do 
 
-* landing page
+* user can't place order without login or temporary guest
+* check same product color and product size and change quantity when product add from page
 * Order completion
 * Order history
 * Admin side
