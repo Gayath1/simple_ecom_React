@@ -31,3 +31,11 @@ You will also see any lint errors in the console.
 * Order history
 * Admin side
 * More products and Details
+
+
+![alt text](https://cdn.glitch.global/38bd85a0-37aa-4e4f-ba23-eb9d7fa285e1/Web%20capture_4-5-2022_205355_localhost.jpeg?v=1651678052856)
+![alt text](https://cdn.glitch.global/38bd85a0-37aa-4e4f-ba23-eb9d7fa285e1/Web%20capture_4-5-2022_205450_localhost.jpeg?v=1651678052792)
+![alt text](https://cdn.glitch.global/38bd85a0-37aa-4e4f-ba23-eb9d7fa285e1/Web%20capture_4-5-2022_20566_localhost.jpeg?v=1651678051835)
+![alt text](https://cdn.glitch.global/38bd85a0-37aa-4e4f-ba23-eb9d7fa285e1/Web%20capture_4-5-2022_205627_localhost.jpeg?v=1651678051298)
+![alt text](https://cdn.glitch.global/38bd85a0-37aa-4e4f-ba23-eb9d7fa285e1/Web%20capture_4-5-2022_205646_localhost.jpeg?v=1651678051539)
+
